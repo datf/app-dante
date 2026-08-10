@@ -22,6 +22,6 @@ schema:
   log_level: list(trace|debug|info|notice|warning|error|fatal)
   require_username_auth: bool
   credentials:
-    user: str
-    password: password
+    username: str?
+    password: password?
 init: false
