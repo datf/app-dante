@@ -1,0 +1,44 @@
+#!/command/with-contenv bashio
+# shellcheck shell=bash
+# ==============================================================================
+# Home Assistant App: Dante
+# Configures username authentication for dante proxy
+# ==============================================================================
+declare username
+declare password
+
+# Don't execute this when username auth is disabled
+if ! bashio::config.true 'require_username_auth'; then
+    bashio::log.info 'No authentication required.'
+    exit 0
+fi
+
+# Check if a username is set
+bashio::config.require.username 'credentials.username'
+
+
+username=$(bashio::config 'credentials.username')
+username=$(bashio::string.lower "${username}")
+
+if grep -q "^${username}:" /etc/passwd; then
+    bashio::log.fatal
+    bashio::log.fatal "The username '${username}' is already a reserved system user!"
+    bashio::log.fatal "Please change the username in your Add-on configuration and restart."
+    bashio::log.fatal
+    
+    bashio::exit.nok
+fi
+
+if bashio::config.has_value 'credentials.password'; then
+    bashio::log.fatal
+    bashio::log.fatal "Please define a password for user '${username}'"
+    bashio::log.fatal
+
+    bashio::exit.nok
+fi
+
+adduser -D "${username}" -s "/bin/zsh" \
+		|| bashio::exit.nok 'Failed creating the user account'
+
+chpasswd <<< "${username}:${password}" 2> /dev/null \
+    || bashio::exit.nok 'Failed setting the password for the user account'

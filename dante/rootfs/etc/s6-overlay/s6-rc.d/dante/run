@@ -1,0 +1,7 @@
+#!/command/with-contenv bashio
+# ==============================================================================
+# Start sockd (dante)
+# s6-overlay docs: https://github.com/just-containers/s6-overlay
+# ==============================================================================
+
+exec /usr/bin/dante-server.sh
