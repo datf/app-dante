@@ -29,7 +29,7 @@ if grep -q "^${username}:" /etc/passwd; then
     bashio::exit.nok
 fi
 
-if bashio::config.has_value 'credentials.password'; then
+if ! bashio::config.has_value 'credentials.password'; then
     bashio::log.fatal
     bashio::log.fatal "Please define a password for user '${username}'"
     bashio::log.fatal
