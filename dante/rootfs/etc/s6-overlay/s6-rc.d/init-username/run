@@ -37,6 +37,8 @@ if ! bashio::config.has_value 'credentials.password'; then
     bashio::exit.nok
 fi
 
+password=$(bashio::config 'credentials.password')
+
 adduser -D "${username}" \
 		|| bashio::exit.nok 'Failed creating the user account'
 
