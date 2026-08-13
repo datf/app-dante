@@ -43,6 +43,7 @@ credentials:
 The `log_level` option controls the level of log output by the add-on. You can change this to be more or less verbose, which is especially helpful when you are troubleshooting an issue.
 
 Possible values are:
+
 - `trace`: Show every detail, like all called internal functions.
 - `debug`: Shows detailed debug information.
 - `info`: Normal (usually) interesting events.
@@ -77,6 +78,7 @@ You can do this by creating a `sockd.conf` file in the **`addon_config` director
 
 > [!TIP]
 > **Network Interfaces (`external`):** In the examples below, the external interface is set to `eth0`. Because Home Assistant can run on many different types of hardware, **your interface name might be different**:
+>
 > - `eth0` is common for standard x86/64 systems and virtual machines.
 > - `end0` is common for ARM devices (like the Raspberry Pi).
 > - `wlan0` is common if you are using Wi-Fi as your main network adapter.
