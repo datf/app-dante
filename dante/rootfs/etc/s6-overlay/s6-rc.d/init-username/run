@@ -39,7 +39,7 @@ fi
 
 password=$(bashio::config 'credentials.password')
 
-adduser -D "${username}" \
+adduser -S -H -D "${username}" \
 		|| bashio::exit.nok 'Failed creating the user account'
 
 chpasswd <<< "${username}:${password}" 2> /dev/null \
