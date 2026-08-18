@@ -9,6 +9,9 @@ arch:
   - amd64
   - aarch64
 startup: services
+ports:
+  1080/tcp: null
+  1080/udp: null
 ports_description:
   1080/tcp: SOCKS proxy TCP
   1080/udp: SOCKS proxy UDP
